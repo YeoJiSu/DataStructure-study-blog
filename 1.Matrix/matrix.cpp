@@ -1,11 +1,6 @@
-// 202055565 여지수 _ 자료구조 과제 1
-// Do not use 2-D array, such as int a[2][3];
 #include <iostream> 
-
 #include <stdlib.h>
 using namespace std;
-
-// implement the functions : add, sub, mult, transpose
 class Matrix { 
     public:
         Matrix(int row, int col); 
@@ -62,7 +57,6 @@ Matrix Matrix::Multiply(Matrix b) {
     {
         for (int j = 0; j < b.cols; j++) 
         {
-            //To be implemented
             int sum = 0;
             for (int k = 0; k < cols; k++){
               sum += Term[k + i*cols]*b.Term[j+ k*b.cols]; 
@@ -79,7 +73,6 @@ Matrix Matrix::Add(Matrix b) {
     Matrix d(rows, cols);
     for (int i = 0; i < rows; i++)
     {
-        //To be implemented
         for (int j=0; j < cols ; j++){
           d.Term[j + i*cols]=Term[j + i*cols]+b.Term[j + i*cols];
         }
@@ -95,7 +88,6 @@ Matrix Matrix::Sub(Matrix b) {
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j++) {
-            //To be implemented
             d.Term[j + i*cols]=Term[j + i*cols]-b.Term[j + i*cols];
         } 
     }
@@ -106,7 +98,7 @@ Matrix Matrix::Multiply2(Matrix b) {
     if (cols != b.rows) cout << "Incompatible matrices" << endl; 
     Matrix bXpose = b.Transpose();
     Matrix d(rows, b.cols);
-    // Must be implemented by using bXpose
+
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < bXpose.rows; j++) 
@@ -132,7 +124,6 @@ int Matrix::Display() {
     n=rows*cols;
     for (int i = 0; i < rows; i++) 
     { 
-      //To be implemented
        for (int j=0; j<cols;j++){
         cout<< Term[j + cols*i]<<" ";
       }
@@ -160,28 +151,23 @@ int main()
     cout << "Transpose() of Matrix b" << endl; 
     t.Display();
 
-    /* If colum of first matrix in not equal to row of second matrix, asking user to enter the size of matrix again. */
-
     if (a.CompareRowCol(b)) 
     {
         cout << "Error! column of first matrix not equal to row of second." ;
         cout << "Enter rows and columns for first matrix: " ; 
     }
-    c = a.Multiply(b); //not using transpose() 
+    c = a.Multiply(b); 
     cout << "Multiply of Matrix a,b" << endl; 
     c.Display(); // instead of   cout << c; 
-    // 현재 Matrix에 overloading operator << 가 구현되어 있지 않기 때문에 앞서 구현한 Display()를 이용하여 출력하겠습니다. 
 
-    d.GetData(); // d 행렬의 data가 있어야 뺄셈이 가능해서 소스코드를 임의로 추가해주었습니다.
+    d.GetData(); 
     d = c.Sub(d);
     d.Display(); // instead of    cout << d;
     cout << "using transpose()" << endl; 
-    t = b.Transpose(); //transpose() 가 오타인 것 같아 Transpose()로 수정해놓았습니다. 
-    c = a.Multiply2(t); //using transpose() 
+    t = b.Transpose(); 
+    c = a.Multiply2(t); 
     c.Display(); // instead of   cout << c;
     
-    // 그러나 위의 a 행렬의 cols와  t 행렬의 rows 값이 같지 않기 때문에 incompatible matrix로 출력됩니다.
-    // 그래서 아래와 같이 코드를 짜서 예시 multiply2를 임의로 출력해보았습니다.
     c = a.Multiply2(b);
     c.Display();
     
