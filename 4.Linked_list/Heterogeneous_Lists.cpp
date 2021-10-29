@@ -38,11 +38,13 @@ class Node
 {
     friend class List;
     friend class ListIterator;
-
+    friend int equal(Node *, Node *);
+    // equal 함수 정의
 protected:
     Node *link;
     virtual Data GetData() = 0;
 };
+
 template <class Type>
 class DerivedNode : public Node
 {
@@ -86,17 +88,46 @@ Data DerivedNode<float>::GetData()
 class List
 {
     friend class ListIterator;
-
+    friend int equal(Node *, Node *);
+    // equal 함수 정의
+private:
+    Node *first;
+    Node *copy(Node *); // private function copy
 public:
     List() { first = 0; }
     ~List(){};
     void Add();
     void Delete();
     Node *Search(Data);
-
-private:
-    Node *first;
+    void copy(const List &); // public function copy
 };
+int equal(Node *s, Node *t)
+{
+    int x;
+    if ((!s) && (!t))
+        return 1;
+    // if (s&&t (s))
+    //어떻게 구현할까 ...
+    return 0;
+}
+// public function copy
+void List::copy(const List &l)
+{
+    first = copy(l.first);
+}
+// private function copy
+Node *List::copy(Node *p)
+{
+    Node *q = 0;
+
+    // if (p) {
+    //   q =  new Node;
+    //   q->
+
+    // }
+    //음.. 여기를 어떻게 구현하지?
+    return q;
+}
 class ListIterator
 {
 public:
@@ -259,6 +290,7 @@ Node *List ::Search(Data tmp)
     }
     return NULL;
 }
+
 Data *ListIterator::First()
 {
     if (list.first)
@@ -346,7 +378,7 @@ void PrintAll(const List &l)
 
 int main()
 {
-    cout << "Hello World!\n";
+    //cout << "Hello World!\n";
     List l;
     //implement heterogeneous linked stacks and queues
     char select;
