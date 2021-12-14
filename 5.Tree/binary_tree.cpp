@@ -1,3 +1,6 @@
+/*
+이진트리 - 전위순회, 중위순회, 후위순회
+*/
 #include <iostream>
 
 using namespace std;
